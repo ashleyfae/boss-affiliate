@@ -7,6 +7,7 @@
  * Author: Boss Plugins
  * Author URI: https://bossplugins.com
  * License: GPL2
+ * GitHub Plugin URI: https://github.com/nosegraze/boss-affiliate
  *
  * @package   boss-affiliate
  * @copyright Copyright (c) 2016, Ashley Gibson
