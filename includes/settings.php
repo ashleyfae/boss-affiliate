@@ -7,6 +7,11 @@
  * @license   GPL2+
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Get Settings
  *
@@ -158,7 +163,7 @@ function boss_affiliate_tag_callback( $args ) {
 	$tag = boss_affiliate_get_setting( 'tag' );
 	?>
 	<p>
-		<label for="boss_affiliate_tag"><?php printf( __( 'Enter the name of one of your <a href="%s">tags</a> to automatically add your disclosure to the top of posts with this tag. Leave this blank if you\'d prefer to manually add your disclosure using this shortcode: %s', 'boss-affiliate' ), esc_url( admin_url( 'edit-tags.php?taxonomy=post_tag' ) ), '<code>[disclosure]</code>' ); ?></label>
+		<label for="boss_affiliate_tag"><?php printf( __( 'Enter the name of one of your <a href="%s">tags</a>. Your disclosure will automatically be added to the top of posts that have this tag applied. Leave this blank to manually add your disclosure using this shortcode: %s', 'boss-affiliate' ), esc_url( admin_url( 'edit-tags.php?taxonomy=post_tag' ) ), '<code>[disclosure]</code>' ); ?></label>
 	</p>
 	<p>
 		<input type="text" id="boss_affiliate_tag" name="boss_affiliate[tag]" class="regular-text" value="<?php echo esc_attr( $tag ); ?>">

@@ -26,5 +26,14 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-require_once 'includes/admin-page.php';
-require_once 'includes/settings.php';
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Include required files.
+ */
+require_once plugin_dir_path( __FILE__ ) . 'includes/admin-page.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/settings.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/shortcode.php';
