@@ -66,6 +66,14 @@ function boss_affiliate_settings_init() {
 		'boss_affiliate_section'
 	);
 
+	add_settings_field(
+		'boss_affiliate[tag]',
+		__( 'Affiliate Tag', 'boss-affiliate' ),
+		'boss_affiliate_tag_callback',
+		'affiliate-disclosure',
+		'boss_affiliate_section'
+	);
+
 	// Create settings in the options table.
 	register_setting( 'boss_affiliate', 'boss_affiliate', 'boss_affiliate_sanitize_settings' );
 
@@ -103,6 +111,10 @@ function boss_affiliate_sanitize_settings( $input = array() ) {
 				$sanitized_settings[ $key ] = wp_kses_post( $value );
 				break;
 
+			case 'tag' :
+				$sanitized_settings[ $key ] = sanitize_text_field( wp_strip_all_tags( $value ) );
+				break;
+
 		}
 
 	}
@@ -128,6 +140,28 @@ function boss_affiliate_disclosure_callback( $args ) {
 	<p>
 		<label for="boss_affiliate_disclosure"><?php _e( 'Enter the disclosure message you want to add to your posts.', 'boss-affiliate' ); ?></label>
 	</p>
-	<textarea id="boss_affiliate_disclosure" name="boss_affiliate[disclosure]" class="large-text" rows="8"><?php echo esc_textarea( $disclosure ); ?></textarea>
+	<p>
+		<textarea id="boss_affiliate_disclosure" name="boss_affiliate[disclosure]" class="large-text" rows="8"><?php echo esc_textarea( $disclosure ); ?></textarea>
+	</p>
+	<?php
+}
+
+/**
+ * Callback: Tag
+ *
+ * @param array $args
+ *
+ * @since 1.0.0
+ * @return void
+ */
+function boss_affiliate_tag_callback( $args ) {
+	$tag = boss_affiliate_get_setting( 'tag' );
+	?>
+	<p>
+		<label for="boss_affiliate_tag"><?php printf( __( 'Enter the name of one of your <a href="%s">tags</a> to automatically add your disclosure to the top of posts with this tag. Leave this blank if you\'d prefer to manually add your disclosure using this shortcode: %s', 'boss-affiliate' ), esc_url( admin_url( 'edit-tags.php?taxonomy=post_tag' ) ), '<code>[disclosure]</code>' ); ?></label>
+	</p>
+	<p>
+		<input type="text" id="boss_affiliate_tag" name="boss_affiliate[tag]" class="regular-text" value="<?php echo esc_attr( $tag ); ?>">
+	</p>
 	<?php
 }
